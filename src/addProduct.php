@@ -7,7 +7,7 @@ use crudPhp\Product;
 use crudPhp\ProductRepositorio;
 
 $connection = new Connection();
-$productsRepositorio = new ProductRepositorio($connection);
+$productsRepository = new ProductRepositorio($connection);
 
 if (
   isset($_POST['image']) &&
@@ -15,16 +15,16 @@ if (
   isset($_POST['price'])
 ) {
 
-  $priceFormatado = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['price']);
+  $formatPrice = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['price']);
 
   $product = new product(
     NULL,
     $_POST['image'],
     $_POST['name'],
-    $priceFormatado,
+    $formatPrice,
   );
 
-  $productsRepositorio->addProduct($product);
+  $productsRepository->addProduct($product);
 }
 
 ?>
@@ -75,8 +75,8 @@ if (
           title="Use o formato R$ 14.000,00" />
       </div>
       <div class="form-actions">
-        <button type="button" class="btn-cancel" id="btnCancelar">Cancelar</button>
-        <button type="submit" class="btn-primary" id="btnSalvar">Salvar</button>
+        <button type="button" class="btn-cancel" id="btnCancel">Cancelar</button>
+        <button type="submit" class="btn-primary" id="btnSave">Salvar</button>
       </div>
     </form>
   </div>

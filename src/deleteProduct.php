@@ -6,5 +6,5 @@ use crudPhp\Connection;
 use crudPhp\ProductRepositorio;
 
 $connection = new Connection();
-$productsRepositorio = new ProductRepositorio($connection);
-$productsRepositorio->deleteProduct($_POST['id']);
+$productsRepository = new ProductRepositorio($connection);
+$productsRepository->deleteProduct($_POST['id']);

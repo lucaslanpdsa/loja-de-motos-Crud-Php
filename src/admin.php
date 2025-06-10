@@ -6,8 +6,8 @@ use crudPhp\ProductRepositorio;
 use crudPhp\Connection;
 
 $connection = new Connection();
-$productsRepositorio = new ProductRepositorio($connection);
-$products = $productsRepositorio->getAllProducts();
+$productsRepository = new ProductRepositorio($connection);
+$products = $productsRepository->getAllProducts();
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@ $products = $productsRepositorio->getAllProducts();
         <label for="price">Preço</label>
         <input required type="text" name="price" id="editarPriceProduct" pattern="^R?\$?\s?\d{1,3}(\.\d{3})*,\d{2}$" title="Use o formato R$ 14.000,00">
         <button type="submit">Salvar</button>
-        <button type="button" id="btnCancelarEdicao">Cancelar</button>
+        <button type="button" id="btnCancelEdicao">Cancelar</button>
       </form>
     </div>
   </div>
@@ -99,17 +99,22 @@ $products = $productsRepositorio->getAllProducts();
         const image = button.getAttribute('data-image');
         const price = button.getAttribute('data-price');
 
+        const formatPrice = price.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+
         document.getElementById('editProductId').value = id;
         document.getElementById('editarNameProduct').value = name;
         document.getElementById('editarImageProduct').value = image;
-        document.getElementById('editarPriceProduct').value = price;
+        document.getElementById('editarPriceProduct').value = formatPrice;
 
         document.getElementById('modalEditProduct').classList.add('active');
         document.getElementById('modalEditProduct').classList.remove('hidden');
       });
     });
 
-    document.getElementById('btnCancelarEdicao').addEventListener('click', () => {
+    document.getElementById('btnCancelEdicao').addEventListener('click', () => {
       document.getElementById('modalEditProduct').classList.remove('active');
       document.getElementById('modalEditProduct').classList.add('hidden');
     });

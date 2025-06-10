@@ -7,7 +7,7 @@ use crudPhp\Product;
 use crudPhp\ProductRepositorio;
 
 $connection = new Connection();
-$productsRepositorio = new ProductRepositorio($connection);
+$productsRepository = new ProductRepositorio($connection);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $priceFormatado = str_replace(['R$', '.', ','], ['', '', '.'], $_POST['price']);
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $priceFormatado,
   );
 
-  $productsRepositorio->updateProduct($product);
+  $productsRepository->updateProduct($product);
 
   header('Location: admin.php');
   exit;
